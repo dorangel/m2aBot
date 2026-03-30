@@ -1,0 +1,52 @@
+[
+  {
+    "id": "loc_001",
+    "name": "Seaside Cottage",
+    "location": "Maldives",
+    "description": "A charming overwater bungalow with direct lagoon access and stunning sunset views.",
+    "price_per_night": 320,
+    "max_guests": 2,
+    "amenities": ["Private pool", "Ocean view", "Breakfast included", "Snorkeling gear"],
+    "emoji": "🏝️"
+  },
+  {
+    "id": "loc_002",
+    "name": "Mountain Lodge",
+    "location": "Swiss Alps",
+    "description": "A cozy timber lodge nestled in the Alps, perfect for skiing in winter and hiking in summer.",
+    "price_per_night": 210,
+    "max_guests": 6,
+    "amenities": ["Fireplace", "Hot tub", "Ski-in/ski-out", "Mountain view"],
+    "emoji": "🏔️"
+  },
+  {
+    "id": "loc_003",
+    "name": "City Apartment",
+    "location": "Paris, France",
+    "description": "A stylish Haussmann-era apartment in the heart of Le Marais, walking distance from major sights.",
+    "price_per_night": 145,
+    "max_guests": 4,
+    "amenities": ["WiFi", "Fully equipped kitchen", "Metro access", "City view"],
+    "emoji": "🗼"
+  },
+  {
+    "id": "loc_004",
+    "name": "Desert Resort Villa",
+    "location": "Dubai, UAE",
+    "description": "A luxury private villa surrounded by golden dunes, with a personal butler and infinity pool.",
+    "price_per_night": 480,
+    "max_guests": 4,
+    "amenities": ["Infinity pool", "Personal butler", "Desert safari", "Spa access"],
+    "emoji": "🏜️"
+  },
+  {
+    "id": "loc_005",
+    "name": "Jungle Retreat",
+    "location": "Costa Rica",
+    "description": "An eco-lodge deep in the rainforest canopy, with wildlife tours and sustainable living.",
+    "price_per_night": 175,
+    "max_guests": 3,
+    "amenities": ["Wildlife tours", "Organic meals", "Canopy walkway", "Solar powered"],
+    "emoji": "🌿"
+  }
+]
