@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:restful-api.dev)",
+      "WebFetch(domain:practicesoftwaretesting.com)",
+      "WebFetch(domain:dummyjson.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:api.restful-api.dev)",
+      "WebFetch(domain:apichallenges.eviltester.com)",
+      "WebFetch(domain:api.practicesoftwaretesting.com)",
+      "Skill(claude-api)",
+      "Bash(ls C:/clones/m2aBot/*.* C:/clones/m2aBot/vimeo_example)"
+    ]
+  }
+}
