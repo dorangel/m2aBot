@@ -1,3 +1,4 @@
+import re
 import anthropic
 from ..config import Config
 from ..core.prompts import TESTING_AGENT_SYSTEM, build_testing_prompt
@@ -21,34 +22,23 @@ class TestingAgent:
         adversarial_gaps: list[dict] | None = None,
         iteration: int = 1,
     ) -> str:
-        """Return the complete test file as a string.
+        """Return the complete test file as a string."""
+        # Inject max_tests into the system prompt at call time
+        system = TESTING_AGENT_SYSTEM.format(max_tests=self.config.max_tests)
 
-        Parameters
-        ----------
-        codebase:
-            ``{relative_path: content}`` dict produced by the codebase reader.
-        existing_tests:
-            The test file from the previous iteration (``None`` on the first run).
-        adversarial_gaps:
-            Structured gap list returned by the Adversarial Agent.
-        iteration:
-            Current loop counter (used only for the prompt header).
-        """
         user_prompt = build_testing_prompt(
             codebase=codebase,
             existing_tests=existing_tests,
             adversarial_gaps=adversarial_gaps,
             iteration=iteration,
+            max_tests=self.config.max_tests,
         )
 
-        # Stream the response — test files can be large and streaming prevents
-        # HTTP timeouts while also letting the model think longer with adaptive
-        # thinking enabled.
         with self.client.messages.stream(
             model=self.config.model,
             max_tokens=16_000,
             thinking={"type": "adaptive"},
-            system=TESTING_AGENT_SYSTEM,
+            system=system,
             messages=[{"role": "user", "content": user_prompt}],
         ) as stream:
             message = stream.get_final_message()
@@ -56,11 +46,21 @@ class TestingAgent:
         return self._extract_text(message)
 
     @staticmethod
+    def extract_test_names(tests: str) -> list[str]:
+        """Parse test function / method names from the generated file.
+
+        Handles pytest-style ``def test_foo``, jest-style ``it('...')`` and
+        ``test('...')``, and vitest/mocha ``it("...")``.
+        """
+        names: list[str] = []
+        # Python / Java / Go: def test_foo or func TestFoo
+        names += re.findall(r"(?:def|func)\s+(test\w+|Test\w+)", tests, re.IGNORECASE)
+        # JS/TS: it('description') or test('description')
+        names += re.findall(r"""(?:it|test)\s*\(\s*['"]([^'"]{3,60})['"]""", tests)
+        return names
+
+    @staticmethod
     def _extract_text(message: anthropic.types.Message) -> str:
-        """Return only the text blocks from a response that may also contain
-        thinking blocks."""
         return "\n".join(
-            block.text
-            for block in message.content
-            if block.type == "text"
+            block.text for block in message.content if block.type == "text"
         ).strip()

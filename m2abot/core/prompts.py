@@ -23,10 +23,18 @@ When given a codebase to analyze:
 5. Write clear test names that read like specifications
    (e.g. "test_create_user_returns_id_on_success").
 
+TEST COUNT LIMIT:
+You MUST generate at most {max_tests} test functions in total.
+Prioritise the highest-value tests: choose breadth of coverage over exhaustive
+repetition of the same scenario. If there are more scenarios than the limit
+allows, pick the most important ones and add a comment at the top of the file
+listing what was intentionally left out.
+
 When improving existing tests based on adversarial feedback:
 - ADD the missing scenarios listed in the gap report.
 - Do NOT remove or modify existing tests that are already correct.
 - Integrate new tests naturally into the existing structure.
+- Stay within the {max_tests} test function limit.
 
 CRITICAL OUTPUT RULE:
 Return ONLY the complete, runnable test file — no explanations, no markdown
@@ -41,6 +49,7 @@ def build_testing_prompt(
     existing_tests: str | None = None,
     adversarial_gaps: list[dict] | None = None,
     iteration: int = 1,
+    max_tests: int = 20,
 ) -> str:
     sections: list[str] = []
 
@@ -67,12 +76,14 @@ def build_testing_prompt(
             + gap_lines
         )
         sections.append(
-            "Add tests for every gap above. Keep all existing tests intact."
+            f"Add tests for every gap above. Keep all existing tests intact. "
+            f"Total test functions must not exceed {max_tests}."
         )
     else:
         sections.append(
-            "Generate a complete test suite for the codebase above. "
-            "Cover every public function, class, and endpoint."
+            f"Generate a complete test suite for the codebase above. "
+            f"Cover every public function, class, and endpoint. "
+            f"Maximum {max_tests} test functions total."
         )
 
     return "\n\n".join(sections)

@@ -25,9 +25,10 @@ def cli() -> None:
 )
 @click.option(
     "--output", "-o",
-    required=True,
-    type=click.Path(file_okay=True, dir_okay=False),
-    help="Output path for the generated test file (e.g. tests/test_generated.py).",
+    default="./m2a_tests",
+    show_default=True,
+    type=click.Path(file_okay=True, dir_okay=True),
+    help="Output directory or .py file path. Defaults to ./m2a_tests/.",
 )
 @click.option(
     "--iterations", "-n",
@@ -77,9 +78,9 @@ def run(
     orchestrator = Orchestrator(config)
     result = orchestrator.run()
 
-    final_tests = result.iteration_results[-1].test_count if result.iteration_results else 0
+    final_tests = len(result.iteration_results[-1].test_names) if result.iteration_results else 0
     click.echo(
-        f"\nDone! Generated ~{final_tests} test(s) in "
+        f"\nDone! Generated {final_tests} test(s) in "
         f"{result.iterations_run} iteration(s)."
     )
 

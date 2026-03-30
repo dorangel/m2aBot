@@ -23,6 +23,8 @@ class Config:
     extensions: list[str] = field(default_factory=lambda: list(DEFAULT_EXTENSIONS))
     exclude_dirs: list[str] = field(default_factory=lambda: list(DEFAULT_EXCLUDE_DIRS))
     api_key: str | None = None
+    # Hard cap on the number of test functions the Testing Agent may generate
+    max_tests: int = 20
     # Files larger than this (KB) are skipped to keep prompts manageable
     max_file_size_kb: int = 150
     # Approximate upper bound on codebase content sent to the model
