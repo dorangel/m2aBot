@@ -68,9 +68,9 @@ vimeo_example/                  # Example usage: tests for a real site
 ## Adding m2aBot to another project (via GitHub)
 
 ```bash
-pip install git+https://github.com/<username>/m2abot.git
+pip install git+https://github.com/dorangel/m2aBot.git
 # or
-uv add git+https://github.com/<username>/m2abot.git
+uv add git+https://github.com/dorangel/m2aBot.git
 ```
 
 Then:

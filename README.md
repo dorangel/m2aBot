@@ -59,18 +59,18 @@ Prints progress at every step and writes the final tests to the output path.
 
 **Option A — pip (recommended)**
 ```bash
-pip install git+https://github.com/<your-username>/m2abot.git
+pip install git+https://github.com/dorangel/m2aBot.git
 ```
 
 **Option B — uv**
 ```bash
-uv add git+https://github.com/<your-username>/m2abot.git
+uv add git+https://github.com/dorangel/m2aBot.git
 ```
 
 **Option C — clone and install locally**
 ```bash
-git clone https://github.com/<your-username>/m2abot.git
-pip install -e ./m2abot
+git clone https://github.com/dorangel/m2aBot.git
+pip install -e ./m2aBot
 ```
 
 **Option D — add to your `pyproject.toml` so every team member gets it**
@@ -78,7 +78,7 @@ pip install -e ./m2abot
 # pyproject.toml in your project
 [project]
 dependencies = [
-    "m2abot @ git+https://github.com/<your-username>/m2abot.git",
+    "m2abot @ git+https://github.com/dorangel/m2aBot.git",
 ]
 ```
 Then `pip install -e .` or `uv sync`.
