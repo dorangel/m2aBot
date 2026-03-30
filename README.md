@@ -90,17 +90,20 @@ export ANTHROPIC_API_KEY=sk-ant-...
 
 ### 3 — Run
 ```bash
-# Generate tests for ./src, write to ./tests/test_generated.py
-m2abot run --target ./src --output ./tests/test_generated.py
+# Generate tests for the current directory (output defaults to ./m2atests/)
+m2abot run --target .
 
-# Two improvement iterations (default), verbose
-m2abot run --target ./src --output ./tests/test_generated.py --iterations 3
+# Write to a specific file instead of the default output folder
+m2abot run --target . --output ./tests/test_generated.py
+
+# Three improvement iterations
+m2abot run --target . --output ./tests/test_generated.py --iterations 3
 
 # Only scan Python files
-m2abot run --target ./src --output ./tests/test_generated.py --extensions .py
+m2abot run --target . --output ./tests/test_generated.py --extensions .py
 
 # Custom model
-m2abot run --target ./src --output ./tests/test_generated.py --model claude-sonnet-4-6
+m2abot run --target . --output ./tests/test_generated.py --model claude-sonnet-4-6
 ```
 
 ---
@@ -112,7 +115,7 @@ m2abot run [OPTIONS]
 
 Options:
   -t, --target TEXT       Path to the codebase to analyze  [required]
-  -o, --output TEXT       Output path for generated tests  [required]
+  -o, --output TEXT       Output directory or .py file  [default: ./m2atests]
   -n, --iterations INT    Number of Testing↔Adversarial cycles  [default: 2]
       --model TEXT        Claude model ID  [default: claude-opus-4-6]
       --extensions TEXT   Comma-separated file extensions to scan

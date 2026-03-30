@@ -14,11 +14,11 @@ that finds gaps. An **Orchestrator** runs them in a loop until no high-priority 
 # Install the package and its dependencies
 uv sync
 
-# Run the CLI against a codebase
-m2abot run --target ./path/to/src --output ./tests/test_generated.py
+# Run the CLI against the current directory (output defaults to ./m2atests/)
+m2abot run --target .
 
-# Or via uv
-uv run m2abot run --target ./path/to/src --output ./tests/test_generated.py
+# Or via uv, with explicit output path
+uv run m2abot run --target . --output ./tests/test_generated.py
 
 # Run the vimeo_example tests (API + UI)
 uv run pytest vimeo_example/tests/api/

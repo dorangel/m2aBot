@@ -25,10 +25,10 @@ def cli() -> None:
 )
 @click.option(
     "--output", "-o",
-    default="./m2a_tests",
+    default="./m2atests",
     show_default=True,
     type=click.Path(file_okay=True, dir_okay=True),
-    help="Output directory or .py file path. Defaults to ./m2a_tests/.",
+    help="Output directory or .py file path. Defaults to ./m2atests/.",
 )
 @click.option(
     "--iterations", "-n",
